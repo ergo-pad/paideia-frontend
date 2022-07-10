@@ -21,6 +21,7 @@ import Zoom from "@mui/material/Zoom";
 import Toolbar from "@mui/material/Toolbar";
 import { PageNavContext } from '@components/Layout'
 import { useRouter } from "next/router";
+import ConnectWallet from "@components/wallet/ConnectWallet";
 // import ConnectWallet from "@components/wallet/ConnectWallet";
 
 const pages = [
@@ -211,9 +212,7 @@ export default function Header() {
                   </Grid>
                 </Grid>
                 <Grid item sx={{ display: { xs: "none", md: "flex" } }}>
-                  <Button disabled variant="contained" size="small">
-                    Connect Wallet
-                  </Button>
+                  <ConnectWallet />
                 </Grid>
                 <Grid item sx={{ display: { xs: "flex", md: "none" } }}>
                   <IconButton>

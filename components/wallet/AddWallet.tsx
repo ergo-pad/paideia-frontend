@@ -19,6 +19,7 @@ import { Address } from "@components/wallet/Address";
 import ProviderListing from "./ProviderListing";
 import Nautilus from "./Nautilus";
 import MobileWallet from "./MobileWallet";
+import axios from "axios";
 
 const WALLET_ADDRESS = "wallet_address";
 export const WALLET_ADDRESS_LIST = "wallet_address_list";
@@ -183,6 +184,15 @@ export const AddWallet: React.FC = () => {
       const addresses = [...address_used, ...address_unused];
       // use the first used address if available or the first unused one if not as default
       const address = addresses.length ? addresses[0] : "";
+      // authenticate
+      // todo: remove hardcoded endpoint
+      const signingMessage = (await axios.post("http://localhost:8000/api/auth/login", { address: address })).data;
+      // @ts-ignore
+      const response = await ergo.auth(address, signingMessage.signingMessage);
+      response.proof = Buffer.from(response.proof, 'hex').toString('base64');
+      // jwt token store in local storage and do stuff
+      // todo: handle failed case... show error message?
+      const token = (await axios.post(signingMessage.tokenUrl, response)).data;
       setWallet(address);
       setWalletInput(address);
       const addressData = addresses.map((address, index) => {
