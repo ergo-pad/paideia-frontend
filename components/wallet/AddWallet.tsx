@@ -24,6 +24,7 @@ import axios from "axios";
 const WALLET_ADDRESS = "wallet_address";
 export const WALLET_ADDRESS_LIST = "wallet_address_list";
 const DAPP_CONNECTED = "dapp_connected";
+const JWT_TOKEN_LOGIN = "jwt_token_login_422";
 
 /**
  * Note on es-lint disable line:
@@ -193,6 +194,7 @@ export const AddWallet: React.FC = () => {
       // jwt token store in local storage and do stuff
       // todo: handle failed case... show error message?
       const token = (await axios.post(signingMessage.tokenUrl, response)).data;
+      sessionStorage.setItem(JWT_TOKEN_LOGIN, token.access_token);
       setWallet(address);
       setWalletInput(address);
       const addressData = addresses.map((address, index) => {
