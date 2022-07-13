@@ -197,7 +197,6 @@ const Nautilus: React.FC<{
                     //@ts-ignore
                     const address_unused = await ergo.get_unused_addresses();
                     const addresses = [...address_used, ...address_unused];
-                    console.log(addresses);
                     const addressData = addresses.map((address, index) => {
                       return { id: index, name: address };
                     });

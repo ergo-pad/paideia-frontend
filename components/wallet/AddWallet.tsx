@@ -255,8 +255,6 @@ export const AddWallet: React.FC = () => {
     }
   }, [view]);
 
-  console.log(dAppWallet.addresses);
-
   return (
     <>
       <Dialog open={addWalletOpen} onClose={() => setAddWalletOpen(false)}>
